@@ -1,5 +1,5 @@
 import { User } from '../../../models/User';
-import { AuthRepository } from '../../repositories/auth.repository';
+import { AuthRepository } from '../../auth.repository';
 
 export class AuthPostgreSQLRepository implements AuthRepository {
   public async signin(): Promise<User> {
