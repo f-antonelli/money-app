@@ -3,7 +3,7 @@ import { object, string, TypeOf } from 'zod';
 const payload = {
   body: object({
     username: string({
-      required_error: 'Name is required',
+      required_error: 'Username is required',
     }).max(15, 'Username must be 15 characters maximum'),
     password: string({
       required_error: 'Password is required',

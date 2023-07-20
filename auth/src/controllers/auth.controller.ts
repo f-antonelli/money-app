@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
+import { POST, before, route } from 'awilix-express';
 import { createUserSchema } from '../schemas/user.schema';
 import { AuthService } from '../services/auth.service';
-import { POST, before, route } from 'awilix-express';
 import validateRequest from '../middleware/validate-request';
+import { BadRequestError } from '../utils/bad-request-error';
 
 @route('/api/v1/auth')
 export class AuthController {
@@ -17,15 +18,22 @@ export class AuthController {
   ) {
     const { username, email, password } = req.body;
 
+    const duplicate = await this.authService.findByEmail(email);
+    if (duplicate) throw new BadRequestError('Email in use');
+
     const result = await this.authService.create({
       username,
       email,
       password,
     });
 
-    res.send(result);
+    if (result) res.status(201).send(result);
+
+    res.status(404);
     try {
-    } catch (err) {}
+    } catch (err) {
+      next(err);
+    }
   }
 
   public async signinHandler(req: Request, res: Response, next: NextFunction) {}
