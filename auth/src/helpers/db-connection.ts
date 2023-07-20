@@ -6,7 +6,6 @@ dotenv.config({
   path: `${__dirname}/../config/${process.env.NODE_ENV}.env`,
 });
 
-console.log(process.env.DB_HOST);
 export const PostgresDataSource = new DataSource({
   type: 'postgres',
   host: process.env.DB_HOST,
