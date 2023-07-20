@@ -1,7 +1,5 @@
-import { User } from '../models/User';
+import { UserCreateDto } from '../dtos/user.dto';
 
 export interface AuthRepository {
-  signup(): Promise<User>;
-  signin(): Promise<User>;
-  loguot(): Promise<void>;
+  create(data: UserCreateDto): Promise<void>;
 }

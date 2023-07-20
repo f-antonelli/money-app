@@ -2,13 +2,9 @@ import { User } from '../../../models/User';
 import { AuthRepository } from '../../auth.repository';
 
 export class AuthPostgreSQLRepository implements AuthRepository {
-  public async signin(): Promise<User> {
-    return new User();
-  }
+  public async create(values: User): Promise<void> {
+    const user = User.create(values);
 
-  public async signup(): Promise<User> {
-    return new User();
+    await user.save();
   }
-
-  public async loguot(): Promise<void> {}
 }
