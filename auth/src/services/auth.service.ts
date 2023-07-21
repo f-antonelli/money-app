@@ -1,7 +1,6 @@
+import { signJwt } from '@money-app/common';
 import { UserCreateDto, UserLoginDto } from '../dtos/user.dto';
-import { User } from '../models/User';
 import { AuthRepository } from '../repositories/auth.repository';
-import { signJwt } from '../utils/jwt';
 import { Password } from '../utils/password';
 
 export class AuthService {
@@ -22,7 +21,7 @@ export class AuthService {
   public async signIn(data: UserLoginDto) {
     const existingUser = await this.findByEmail(data.email);
     if (!existingUser) return null;
-    
+
     const checkPassword = await Password.compare(
       existingUser.password,
       data.password

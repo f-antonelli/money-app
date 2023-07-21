@@ -1,10 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import Container from './container';
-import { errorHandler } from '../middleware/error-handler';
-import { NotFoundError } from '../utils/not-found';
 import { loadControllers } from 'awilix-express';
 import cookieSession from 'cookie-session';
+import { errorHandler, NotFoundError } from '@money-app/common';
 
 const app = express();
 

@@ -2,9 +2,11 @@ import { NextFunction, Request, Response } from 'express';
 import { GET, POST, before, route } from 'awilix-express';
 import { createUserSchema, loginUserSchema } from '../schemas/user.schema';
 import { AuthService } from '../services/auth.service';
-import validateRequest from '../middleware/validate-request';
-import { BadRequestError } from '../utils/bad-request-error';
-import { currentUser } from '../middleware/current-user';
+import {
+  validateRequest,
+  BadRequestError,
+  currentUser,
+} from '@money-app/common';
 
 @route('/api/v1/auth')
 export class AuthController {

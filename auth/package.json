@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@money-app/common": "^1.0.3",
     "awilix": "^8.0.1",
     "awilix-express": "^8.0.0",
     "cookie-session": "^2.0.0",
