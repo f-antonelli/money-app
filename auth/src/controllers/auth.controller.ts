@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { POST, before, route } from 'awilix-express';
+import { GET, POST, before, route } from 'awilix-express';
 import { createUserSchema, loginUserSchema } from '../schemas/user.schema';
 import { AuthService } from '../services/auth.service';
 import validateRequest from '../middleware/validate-request';
 import { BadRequestError } from '../utils/bad-request-error';
+import { currentUser } from '../middleware/current-user';
 
 @route('/api/v1/auth')
 export class AuthController {
@@ -55,5 +56,20 @@ export class AuthController {
     } catch (err) {
       next(err);
     }
+  }
+
+  @route('/signout')
+  @POST()
+  public async signoutHandler(req: Request, res: Response, next: NextFunction) {
+    req.session = null;
+
+    res.send({});
+  }
+
+  @route('/currentuser')
+  @GET()
+  @before(currentUser)
+  public async currentUser(req: Request, res: Response, next: NextFunction) {
+    res.send({ currentUser: req.currentUser || null });
   }
 }
