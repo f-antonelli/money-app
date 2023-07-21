@@ -17,24 +17,24 @@ export class AuthController {
     next: NextFunction
   ) {
     const { username, email, password } = req.body;
-
-    const duplicate = await this.authService.findByEmail(email);
-    if (duplicate) throw new BadRequestError('Email in use');
-
-    const result = await this.authService.create({
-      username,
-      email,
-      password,
-    });
-
-    if (result) res.status(201).send(result);
-
-    res.status(404);
+    
     try {
+      const duplicate = await this.authService.findByEmail(email);
+      if (duplicate) throw new BadRequestError('Email in use');
+
+      const result = await this.authService.create({
+        username,
+        email,
+        password,
+      });
+
+      if (result) res.status(201).send(result);
+
+      res.status(404);
     } catch (err) {
       next(err);
     }
   }
 
-  public async signinHandler(req: Request, res: Response, next: NextFunction) {}
+  // public async signinHandler(req: Request, res: Response, next: NextFunction) {}
 }

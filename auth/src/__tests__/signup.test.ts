@@ -8,9 +8,9 @@ it('returns a 201 on successful signup', async () => {
       username: 'fede2',
       email: 'test2@test.com',
       password: '12356775',
-      passwordConfirmation: '12356775'
-    }).expect(201)
-
+      passwordConfirmation: '12356775',
+    })
+    .expect(201);
 });
 
 it('second testing', async () => {
@@ -20,6 +20,7 @@ it('second testing', async () => {
       username: 'fede2',
       email: 'test2@test.com',
       password: '12356775',
-      passwordConfirmation: '12356775'
-    }).expect(201)
+      passwordConfirmation: '12356775',
+    })
+    .expect(201);
 });
