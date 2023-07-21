@@ -18,7 +18,7 @@ export class User extends BaseEntity {
   @Column({ type: 'text', width: 15 })
   username!: string;
 
-  @Column({ type: 'text', select: false })
+  @Column({ type: 'text'})
   password!: string;
 
   @Column({ unique: true, type: 'text' })

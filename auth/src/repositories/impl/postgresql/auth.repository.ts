@@ -18,12 +18,12 @@ export class AuthPostgreSQLRepository implements AuthRepository {
     return result;
   }
 
-  public async create(values: User): Promise<User | null> {
+  public async create(values: User): Promise<void> {
     const result = User.create(values);
     await result.save();
 
-    if (!result) return null;
+    // if (!result) return null;
 
-    return result;
+    // return result;
   }
 }

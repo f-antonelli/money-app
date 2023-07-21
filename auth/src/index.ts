@@ -3,7 +3,8 @@ import { PostgresDataSource } from './helpers/db-connection';
 
 const start = () => {
   if (!process.env.NODE_ENV) throw new Error('NODE_ENV must be defined');
-
+  if (!process.env.SECRET_KEY) throw new Error('SECRET_KEY must be defined');
+  
   PostgresDataSource.initialize()
     .then(() => {
       console.log('Connected to PostgreSQL');
