@@ -16,3 +16,17 @@ export const PostgresDataSource = new DataSource({
   synchronize: true,
   entities: [User],
 });
+
+export const PostgresTestDataSource = new DataSource({
+  name: 'test',
+  type: 'postgres',
+  host: 'moneyapp.dev',
+  port: 5433,
+  username: 'postgres',
+  password: 'postgres',
+  database: 'tests',
+  dropSchema: true,
+  logging: false,
+  synchronize: true,
+  entities: [User],
+});
