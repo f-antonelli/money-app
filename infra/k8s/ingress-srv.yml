@@ -17,3 +17,10 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
+          - path: /api/v1/expenses/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: expenses-srv
+                port:
+                  number: 3001

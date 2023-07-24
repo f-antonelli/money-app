@@ -12,6 +12,14 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: ffantonelli/expenses
+      context: expenses
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
 deploy:
   kubectl: {}
 manifests:

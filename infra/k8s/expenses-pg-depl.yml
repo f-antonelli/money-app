@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expenses-pg-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expenses-pg
+  template:
+    metadata:
+      labels:
+        app: expenses-pg
+    spec:
+      containers:
+        - name: expenses-pg
+          image: postgres
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pg-password
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: pg-db
+                  key: POSTGRES_DB
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expenses-pg-srv
+spec:
+  selector:
+    app: expenses-pg
+  ports:
+    - name: expenses-db
+      protocol: TCP
+      port: 5432
+      targetPort: 5432
