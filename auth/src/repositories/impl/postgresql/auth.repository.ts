@@ -21,9 +21,5 @@ export class AuthPostgreSQLRepository implements AuthRepository {
   public async create(values: User): Promise<void> {
     const result = User.create(values);
     await result.save();
-
-    // if (!result) return null;
-
-    // return result;
   }
 }
