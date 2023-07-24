@@ -24,3 +24,10 @@ spec:
                 name: expenses-srv
                 port:
                   number: 3001
+          - path: /api/v1/category/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: expenses-srv
+                port:
+                  number: 3001

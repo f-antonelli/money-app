@@ -6,13 +6,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  OneToOne,
 } from 'typeorm';
 import { Category } from './Category';
-
-enum ExpenseType {
-  INCOME = 'INCOME',
-  OUTCOME = 'OUTCOME',
-}
+import { ExpenseType } from '../enums/Expenses';
 
 @Entity()
 export class Expense extends BaseEntity {
@@ -26,7 +23,7 @@ export class Expense extends BaseEntity {
   type!: ExpenseType;
 
   @Column({ type: 'int' })
-  amount!: string;
+  amount!: number;
 
   @CreateDateColumn()
   created_at!: Date;
@@ -34,6 +31,6 @@ export class Expense extends BaseEntity {
   @UpdateDateColumn()
   updated_at!: Date;
 
-  @ManyToOne(() => Category, (category) => category.category_id)
+  @OneToOne(() => Category, (category) => category.category_id)
   category_id!: number;
 }
