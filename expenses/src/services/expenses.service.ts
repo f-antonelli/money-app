@@ -1,4 +1,4 @@
-import { ExpenseCreateDto } from '../dtos/expenses.dto';
+import { ExpenseCreateDto, ExpenseSearchDto } from '../dtos/expenses.dto';
 import { Expense } from '../models/Expense';
 import { ExpensesRepository } from '../repositories/expenses.repository';
 
@@ -11,5 +11,9 @@ export class ExpensesService {
 
   public async all(userId: string): Promise<Expense[]> {
     return await this.expensesRepository.all(userId);
+  }
+
+  public async find(entry: ExpenseSearchDto): Promise<Expense | null> {
+    return await this.expensesRepository.find(entry);
   }
 }

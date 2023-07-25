@@ -1,10 +1,16 @@
-import { ExpenseCreateDto } from '../../../dtos/expenses.dto';
+import { ExpenseCreateDto, ExpenseSearchDto } from '../../../dtos/expenses.dto';
 import { Expense } from '../../../models/Expense';
 import { ExpensesRepository } from '../../expenses.repository';
 
 export class ExpensesPostgreSQLRepository implements ExpensesRepository {
-  find(id: number): Promise<Expense | null> {
-    throw new Error('Method not implemented.');
+  async find(entry: ExpenseSearchDto): Promise<Expense | null> {
+    const result = await Expense.findOne({
+      where: { userid: entry.userid, expense_id: entry.expense_id },
+    });
+
+    if (!result) return null;
+
+    return result;
   }
 
   async all(id: string): Promise<Expense[]> {
