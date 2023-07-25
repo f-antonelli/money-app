@@ -3,7 +3,7 @@ import { route, POST, GET } from 'awilix-express';
 import { CategoryService } from '../services/category.service';
 
 @route('/api/v1/category')
-export class ExpensesController {
+export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @GET()
