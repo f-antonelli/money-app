@@ -6,8 +6,10 @@
   "scripts": {
     "start": "tsnd --poll src/index.ts",
     "start:dev": "tsnd --exit-child --respawn --transpile-only src/index.ts",
-    "lint": "eslint src/**/*.ts --max-warnings=0 --fix",
-    "test": "jest --watchAll --no-cache --runInBand --verbose true"
+    "lint:check": "eslint src/**/*.ts --max-warnings=0",
+    "lint:fix": "eslint src/**/*.ts --max-warnings=0 --fix",
+    "test": "jest --watchAll --no-cache --runInBand --verbose true",
+    "test:ci": "jest"
   },
   "jest": {
     "preset": "ts-jest",

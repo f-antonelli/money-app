@@ -1,0 +1,13 @@
+name: tests-expenses
+
+on:
+  pull_request:
+    paths:
+      - 'expenses/**'
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: cd expenses && npm install && npm run lint:check
