@@ -6,4 +6,5 @@ export interface ExpenseCreateDto {
   amount: number;
   type: ExpenseType;
   category_id: CategoryType;
+  userid: string
 }

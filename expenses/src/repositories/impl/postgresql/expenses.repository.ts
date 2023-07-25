@@ -6,8 +6,11 @@ export class ExpensesPostgreSQLRepository implements ExpensesRepository {
   find(id: number): Promise<Expense | null> {
     throw new Error('Method not implemented.');
   }
-  all(): Promise<Expense[]> {
-    throw new Error('Method not implemented.');
+
+  async all(id: string): Promise<Expense[]> {
+    const result = await Expense.find({ where: { userid: id } });
+
+    return result;
   }
 
   async store(entry: ExpenseCreateDto): Promise<void> {

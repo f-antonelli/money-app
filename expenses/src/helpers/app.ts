@@ -3,7 +3,7 @@ import cors from 'cors';
 import Container from './container';
 import { loadControllers } from 'awilix-express';
 import cookieSession from 'cookie-session';
-import { errorHandler, NotFoundError } from '@money-app/common';
+import { currentUser, errorHandler, NotFoundError } from '@money-app/common';
 
 const app = express();
 
@@ -17,10 +17,11 @@ app.use(
   })
 );
 
+app.use(currentUser);
+
 Container(app);
 
 app.use(loadControllers('controllers/*.ts', { cwd: `${__dirname}/../` }));
-
 
 app.all('*', () => {
   throw new NotFoundError();

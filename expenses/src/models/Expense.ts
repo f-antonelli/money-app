@@ -25,6 +25,9 @@ export class Expense extends BaseEntity {
   @Column({ type: 'int' })
   amount!: number;
 
+  @Column({ type: 'uuid' })
+  userid!: string;
+
   @CreateDateColumn()
   created_at!: Date;
 
