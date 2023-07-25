@@ -20,9 +20,8 @@ app.use(
 Container(app);
 
 app.use(loadControllers('controllers/*.ts', { cwd: `${__dirname}/../` }));
-app.get('/api/v1/expenses/test', (req, res) => {
-  res.send('hola');
-});
+
+
 app.all('*', () => {
   throw new NotFoundError();
 });
