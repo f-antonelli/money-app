@@ -9,8 +9,18 @@ export class CategoryPostgreSQLRepository implements CategoryRepository {
     return result;
   }
 
-  async store(entry: CategoryCreateDto): Promise<void> {
-    const result = Category.create({ ...entry });
-    await result.save();
+  async store(entry: CategoryCreateDto[]): Promise<void> {
+    await Category.createQueryBuilder('categories')
+      .insert()
+      .into(Category)
+      .values(entry)
+      .execute();
+  }
+
+  async remove(): Promise<void> {
+    await Category.createQueryBuilder('categories')
+      .delete()
+      .from(Category)
+      .execute();
   }
 }

@@ -1,5 +1,4 @@
 import { nativeEnum, number, object, string, TypeOf } from 'zod';
-import { ExpenseType } from '../enums/Expenses';
 import { CategoryType } from '../enums/Categories';
 
 const payload = {
@@ -7,8 +6,7 @@ const payload = {
     name: string({
       required_error: 'Name is required',
     }).max(50, 'Username must be 50 characters maximum'),
-    type: nativeEnum(ExpenseType),
-    category_id: nativeEnum(CategoryType),
+    type: nativeEnum(CategoryType),
     amount: number({
       required_error: 'Amount is required',
     }),

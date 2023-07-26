@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { route, POST, before, GET, DELETE } from 'awilix-express';
+import { route, POST, before, GET, DELETE, PUT } from 'awilix-express';
 import { ExpensesService } from '../services/expenses.service';
 import { NotFoundError, requireAuth, validateRequest } from '@money-app/common';
 import { createExpenseSchema } from '../schemas/expenses.schema';
@@ -30,6 +30,25 @@ export class ExpensesController {
       const result = await this.expensesService.all(req.currentUser!.id);
 
       res.send(result);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  @route('/:id')
+  @PUT()
+  @before([requireAuth, validateRequest(createExpenseSchema)])
+  public async update(req: Request, res: Response, next: NextFunction) {
+    const expense_id = req.params.id;
+
+    try {
+      await this.expensesService.update({
+        ...req.body,
+        expense_id,
+        user_id: req.currentUser!.id,
+      });
+
+      res.status(200).send({ message: 'Expense updated' });
     } catch (err) {
       next(err);
     }

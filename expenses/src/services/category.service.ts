@@ -10,8 +10,8 @@ export class CategoryService {
   }
 
   public async store(): Promise<void> {
-    for (const category of categoryData) {
-      await this.categoryRepository.store(category);
-    }
+    await this.categoryRepository.remove();
+    
+    await this.categoryRepository.store(categoryData);
   }
 }

@@ -5,11 +5,11 @@ import {
   BaseEntity,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
   OneToOne,
+  ManyToOne,
 } from 'typeorm';
+import { CategoryType } from '../enums/Categories';
 import { Category } from './Category';
-import { ExpenseType } from '../enums/Expenses';
 
 @Entity()
 export class Expense extends BaseEntity {
@@ -19,8 +19,8 @@ export class Expense extends BaseEntity {
   @Column({ type: 'varchar', width: 50 })
   name!: string;
 
-  @Column({ type: 'enum', enum: ExpenseType, default: ExpenseType.OUTCOME })
-  type!: ExpenseType;
+  @Column({ type: 'enum', enum: CategoryType, default: CategoryType.Services })
+  type!: CategoryType;
 
   @Column({ type: 'int' })
   amount!: number;
@@ -33,7 +33,4 @@ export class Expense extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at!: Date;
-
-  @OneToOne(() => Category, (category) => category.category_id)
-  category_id!: number;
 }

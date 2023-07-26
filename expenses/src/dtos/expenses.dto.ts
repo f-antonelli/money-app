@@ -1,12 +1,18 @@
 import { CategoryType } from '../enums/Categories';
-import { ExpenseType } from '../enums/Expenses';
 
 export interface ExpenseCreateDto {
   name: string;
   amount: number;
-  type: ExpenseType;
-  category_id: CategoryType;
+  type: CategoryType;
   user_id: string;
+}
+
+export interface ExpenseUpdateDto {
+  name: string;
+  amount: number;
+  type: CategoryType;
+  user_id: string;
+  expense_id: string;
 }
 
 export interface ExpenseSearchDto {

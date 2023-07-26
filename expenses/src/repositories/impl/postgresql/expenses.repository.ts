@@ -1,4 +1,8 @@
-import { ExpenseCreateDto, ExpenseSearchDto } from '../../../dtos/expenses.dto';
+import {
+  ExpenseCreateDto,
+  ExpenseSearchDto,
+  ExpenseUpdateDto,
+} from '../../../dtos/expenses.dto';
 import { Expense } from '../../../models/Expense';
 import { ExpensesRepository } from '../../expenses.repository';
 
@@ -14,18 +18,25 @@ export class ExpensesPostgreSQLRepository implements ExpensesRepository {
   }
 
   async all(id: string): Promise<Expense[]> {
-    const result = await Expense.find({ where: { user_id: id } });
-
-    return result;
+    return await Expense.createQueryBuilder('expenses')
+      .where('user_id = :user_id', { user_id: id })
+      .getMany();
   }
 
   async store(entry: ExpenseCreateDto): Promise<void> {
-    const result = Expense.create(entry);
-    await result.save();
+    await Expense.createQueryBuilder('expenses')
+      .insert()
+      .into(Expense)
+      .values(entry)
+      .execute();
   }
 
-  update(entry: Expense): Promise<void> {
-    throw new Error('Method not implemented.');
+  async update(entry: ExpenseUpdateDto): Promise<void> {
+    await Expense.createQueryBuilder()
+      .update(Expense)
+      .set({ name: entry.name, amount: entry.amount, type: entry.type })
+      .where('user_id = :user_id', { user_id: entry.user_id })
+      .execute();
   }
 
   async remove(entry: ExpenseSearchDto): Promise<void> {

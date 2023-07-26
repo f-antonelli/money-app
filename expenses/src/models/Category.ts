@@ -7,7 +7,7 @@ import {
 
 @Entity()
 export class Category extends BaseEntity {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn('identity')
   category_id!: number;
 
   @Column({ type: 'varchar', width: 50 })
