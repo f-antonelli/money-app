@@ -1,0 +1,299 @@
+{
+	"info": {
+		"_postman_id": "1cd32ceb-676f-44bc-9b82-e4a3ac1da64a",
+		"name": "MoneyAPP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19195250"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"fede1\",\r\n    \"email\": \"fede1@test.com\",\r\n    \"password\": \"12345678\",\r\n    \"passwordConfirmation\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/auth/signup",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log in user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fede1@test.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/auth/signin",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Log out user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/auth/signout",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Current user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/auth/currentuser",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"currentuser"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "EXPENSES",
+			"item": [
+				{
+					"name": "CATEGORIES",
+					"item": [
+						{
+							"name": "Create categories",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://moneyapp.dev/api/v1/category",
+									"protocol": "https",
+									"host": [
+										"moneyapp",
+										"dev"
+									],
+									"path": [
+										"api",
+										"v1",
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://moneyapp.dev/api/v1/category",
+									"protocol": "https",
+									"host": [
+										"moneyapp",
+										"dev"
+									],
+									"path": [
+										"api",
+										"v1",
+										"category"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Create expense",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"barrita de cereal\",\r\n    \"amount\": 12312,\r\n    \"type\": \"OUTCOME\",\r\n    \"category_id\": 7\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/expenses",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all expenses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/expenses",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"expenses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get expense by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/expenses/2a6b5f66-e6b4-44dc-b64b-819851a5c092",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"expenses",
+								"2a6b5f66-e6b4-44dc-b64b-819851a5c092"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete expense by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/expenses/1769baeb-31f1-42eb-aef1-4d551b40f9a4",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"expenses",
+								"1769baeb-31f1-42eb-aef1-4d551b40f9a4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update expense",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"celular\",\r\n    \"amount\": 567657,\r\n    \"type\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://moneyapp.dev/api/v1/expenses/665a5d80-6ac8-4711-a90a-d74d0b2e8272",
+							"protocol": "https",
+							"host": [
+								"moneyapp",
+								"dev"
+							],
+							"path": [
+								"api",
+								"v1",
+								"expenses",
+								"665a5d80-6ac8-4711-a90a-d74d0b2e8272"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
