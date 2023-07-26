@@ -16,4 +16,8 @@ export class ExpensesService {
   public async find(entry: ExpenseSearchDto): Promise<Expense | null> {
     return await this.expensesRepository.find(entry);
   }
+
+  public async remove(entry: ExpenseSearchDto): Promise<void> {
+    await this.expensesRepository.remove(entry);
+  }
 }

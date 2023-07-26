@@ -6,5 +6,5 @@ export interface ExpensesRepository {
   all(id: string): Promise<Expense[]>;
   store(entry: ExpenseCreateDto): Promise<void>;
   update(entry: Expense): Promise<void>;
-  remove(id: number): Promise<void>;
+  remove(entry: ExpenseSearchDto): Promise<void>;
 }
