@@ -1,8 +1,11 @@
 import express from 'express';
 import cors from 'cors';
-import Container from './container';
-import { loadControllers } from 'awilix-express';
 import cookieSession from 'cookie-session';
+import Container from './container';
+import swaggerDocs from 'swagger-jsdoc';
+import { serve, setup } from 'swagger-ui-express';
+import { loadControllers } from 'awilix-express';
+import { SwaggerOptions } from './swagger-config';
 import { currentUser, errorHandler, NotFoundError } from '@money-app/common';
 
 const app = express();
@@ -18,6 +21,14 @@ app.use(
 );
 
 app.use(currentUser);
+
+// HEALTH-CHECK
+app.get('/api/v1/expenses/healthcheck', (_, res) => {
+  res.send({ message: 'API running :)' });
+});
+
+//  SWAGGER
+app.use('/api/v1/expenses/docs', serve, setup(swaggerDocs(SwaggerOptions)));
 
 Container(app);
 

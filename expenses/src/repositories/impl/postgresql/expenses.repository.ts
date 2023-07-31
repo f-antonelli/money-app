@@ -1,16 +1,16 @@
 import {
-  ExpenseCreateDto,
   ExpenseSearchDto,
-  ExpenseUpdateDto,
 } from '../../../dtos/expenses.dto';
 import { Expense } from '../../../models/Expense';
 import { ExpensesRepository } from '../../expenses.repository';
 
 export class ExpensesPostgreSQLRepository implements ExpensesRepository {
   async find(entry: ExpenseSearchDto): Promise<Expense | null> {
-    const result = await Expense.findOne({
-      where: { user_id: entry.user_id, expense_id: entry.expense_id },
-    });
+    const result = await Expense.createQueryBuilder('expenses')
+      .leftJoinAndSelect('expenses.type', 'type')
+      .where('user_id = :user_id', { user_id: entry.user_id })
+      .andWhere('expense_id = :expense_id', { expense_id: entry.expense_id })
+      .getOne();
 
     if (!result) return null;
 
@@ -19,11 +19,12 @@ export class ExpensesPostgreSQLRepository implements ExpensesRepository {
 
   async all(id: string): Promise<Expense[]> {
     return await Expense.createQueryBuilder('expenses')
+      .leftJoinAndSelect('expenses.type', 'type')
       .where('user_id = :user_id', { user_id: id })
       .getMany();
   }
 
-  async store(entry: ExpenseCreateDto): Promise<void> {
+  async store(entry: Partial<Expense>): Promise<void> {
     await Expense.createQueryBuilder('expenses')
       .insert()
       .into(Expense)
@@ -31,7 +32,7 @@ export class ExpensesPostgreSQLRepository implements ExpensesRepository {
       .execute();
   }
 
-  async update(entry: ExpenseUpdateDto): Promise<void> {
+  async update(entry: Partial<Expense>): Promise<void> {
     await Expense.createQueryBuilder()
       .update(Expense)
       .set({ name: entry.name, amount: entry.amount, type: entry.type })
